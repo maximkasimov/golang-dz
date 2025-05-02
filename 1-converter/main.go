@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 var userInCurrency string
 var userOutCurrency string
@@ -17,9 +20,9 @@ func main() {
 	fmt.Println("Введите целевую валюту (валюту В которую будет проходить конвертация)")
 	userOutCurrency = chooseOutCurrency()
 
-	fmt.Print("При конвертации ", userAmmount, userInCurrency, " в ", userOutCurrency, " получается ")
+	fmt.Print("При конвертации ", userAmmount, " ", strings.ToUpper(userInCurrency), " в ", strings.ToUpper(userOutCurrency), " получается ")
 	fmt.Printf("%.2f", userCounting(userAmmount, userInCurrency, userOutCurrency))
-	fmt.Println(userOutCurrency)
+	fmt.Println(strings.ToUpper(userOutCurrency))
 }
 
 func chooseInCurrency() string {
