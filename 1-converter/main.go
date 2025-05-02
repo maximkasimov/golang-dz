@@ -11,13 +11,14 @@ func main() {
 	fmt.Println("Добро пожаловать в консольный конвертер валют")
 	fmt.Println("Введите исходную валюту (валюту ИЗ которой будет проходить конвертация): ")
 	userInCurrency = chooseInCurrency()
-	fmt.Println(userInCurrency)
 
 	userAmmount = userAmmountInput()
-	fmt.Println(userAmmount)
 
 	fmt.Println("Введите целевую валюту (валюту В которую будет проходить конвертация)")
 	userOutCurrency = chooseOutCurrency()
+
+	fmt.Print("При конвертации ", userAmmount, userInCurrency, " в ", userOutCurrency, " получается ")
+	fmt.Printf("%.2f", userCounting(userAmmount, userInCurrency, userOutCurrency))
 	fmt.Println(userOutCurrency)
 }
 
@@ -116,8 +117,33 @@ func userAmmountInput() float32 {
 	}
 }
 
-// func userCounting(userAmmount float64, userInCurrency string, userOutCurrency string) float64 {
-// 	const usd2Eur = 0.88
-// 	const usd2Rub = 83.5
+func userCounting(userAmmount float32, userInCurrency string, userOutCurrency string) float32 {
+	const usd2Eur = 0.88
+	const usd2Rub = 83.5
+	var currSumm float32
 
-// }
+	switch userInCurrency {
+	case "eur":
+		switch userOutCurrency {
+		case "usd":
+			currSumm = userAmmount / usd2Eur
+		case "rub":
+			currSumm = userAmmount / usd2Eur * usd2Rub
+		}
+	case "usd":
+		switch userOutCurrency {
+		case "eur":
+			currSumm = userAmmount * usd2Eur
+		case "rub":
+			currSumm = userAmmount * usd2Rub
+		}
+	case "rub":
+		switch userOutCurrency {
+		case "usd":
+			currSumm = userAmmount / usd2Rub
+		case "eur":
+			currSumm = userAmmount / usd2Rub * usd2Eur
+		}
+	}
+	return currSumm
+}
